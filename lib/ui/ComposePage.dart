@@ -49,6 +49,7 @@ class ComposePage extends StatelessWidget {
               ),
               Expanded(
                 child: TextField(
+                  autofocus: true,
                   onChanged: (text) {
                     from = text;
                   },
