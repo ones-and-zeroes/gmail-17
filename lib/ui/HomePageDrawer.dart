@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class HomePageDrawer extends StatelessWidget {
   @override
@@ -7,21 +8,25 @@ class HomePageDrawer extends StatelessWidget {
       child: ListView(
         children: <Widget>[
           UserAccountsDrawerHeader(
-            decoration: BoxDecoration(color: Colors.blueAccent),
-            accountName: Text("dsad"),
-            accountEmail: Text("dsfs"),
-            currentAccountPicture: Icon(
-              Icons.account_circle,
-              size: 50.0,
-              color: Colors.white,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/drawerBackImage.jpg'),
+                fit: BoxFit.fill,
+              ),
+            ),
+            accountName: Text("Shreyansh"),
+            accountEmail: Text("shreyansh.yadav.cse19@iitbhu.ac.in"),
+            currentAccountPicture: CircleAvatar(
+              backgroundImage: AssetImage('assets/drawerAvatar.png'),
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              "Gmail 13",
+              "Gmail 17",
               style: TextStyle(
                 fontSize: 25,
+                fontFamily: "Montserrat",
               ),
             ),
           ),

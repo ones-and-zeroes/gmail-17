@@ -21,7 +21,10 @@ class DetailPage extends StatelessWidget {
             icon: Icon(Icons.archive),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Provider.of<EmailData>(context, listen: false).deleteEmail(data);
+              Navigator.pop(context);
+            },
             icon: Icon(Icons.delete),
           ),
           IconButton(

@@ -88,4 +88,9 @@ class EmailData extends ChangeNotifier {
     defaultData.insert(0, emailItem);
     notifyListeners();
   }
+
+  void deleteEmail(EmailItem emailItem) {
+    defaultData.remove(emailItem);
+    notifyListeners();
+  }
 }

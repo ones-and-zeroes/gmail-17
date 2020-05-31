@@ -5,7 +5,8 @@ import 'package:gmail17/ui/SearchPage.dart';
 
 class FloatAppBar extends StatelessWidget with PreferredSizeWidget {
   final String floatBarText;
-  FloatAppBar([this.floatBarText]);
+  final bool isSearch;
+  FloatAppBar([this.floatBarText, this.isSearch]);
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -22,7 +23,7 @@ class FloatAppBar extends StatelessWidget with PreferredSizeWidget {
               ),
               borderRadius: BorderRadius.all(Radius.circular(15)),
             ),
-            child: FloatSearchBarRow(floatBarText),
+            child: FloatSearchBarRow(floatBarText, isSearch),
           ),
         ),
       ],
@@ -34,31 +35,36 @@ class FloatAppBar extends StatelessWidget with PreferredSizeWidget {
 }
 
 class FloatSearchBarRow extends StatefulWidget {
+  bool onSearch;
   String floatBarText;
-  FloatSearchBarRow(this.floatBarText);
+  FloatSearchBarRow(this.floatBarText, [this.onSearch]);
   @override
   _FloatSearchBarRowState createState() =>
-      _FloatSearchBarRowState(floatBarText);
+      _FloatSearchBarRowState(floatBarText, onSearch);
 }
 
 class _FloatSearchBarRowState extends State<FloatSearchBarRow> {
   String floatBarText;
-  _FloatSearchBarRowState(this.floatBarText);
+  bool onSearch;
+  _FloatSearchBarRowState(this.floatBarText, this.onSearch);
   TextEditingController textController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
+    if (onSearch == null) onSearch = false;
     return Row(
       children: <Widget>[
-        Material(
-          type: MaterialType.transparency,
-          child: IconButton(
-            splashColor: Colors.grey,
-            icon: Icon(Icons.menu),
-            onPressed: () {
-              Scaffold.of(context).openDrawer();
-            },
-          ),
-        ),
+        onSearch
+            ? BackButton()
+            : Material(
+                type: MaterialType.transparency,
+                child: IconButton(
+                  splashColor: Colors.grey,
+                  icon: Icon(Icons.menu),
+                  onPressed: () {
+                    Scaffold.of(context).openDrawer();
+                  },
+                ),
+              ),
         Expanded(
           child: TextField(
             controller: textController,
