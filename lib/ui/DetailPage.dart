@@ -18,6 +18,11 @@ class DetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        iconTheme: IconThemeData(
+          color: Colors.black54,
+        ),
         actions: <Widget>[
           IconButton(
             onPressed: () {},
@@ -32,7 +37,9 @@ class DetailPage extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.markunread),
+            icon: Icon(
+              Icons.markunread,
+            ),
           ),
           IconButton(
             onPressed: () {},

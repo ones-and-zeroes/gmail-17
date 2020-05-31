@@ -9,6 +9,11 @@ class ComposePage extends StatelessWidget {
     String from = "", to = "", subject = "", description = "";
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        iconTheme: IconThemeData(
+          color: Colors.black54,
+        ),
         title: Text("Compose"),
         actions: <Widget>[
           IconButton(
@@ -30,6 +35,7 @@ class ComposePage extends StatelessWidget {
                   fav: false,
                   date: DateTime.now(),
                   colorIndex: getColorIndex(),
+                  read: true,
                 ),
               );
               Navigator.pop(context);

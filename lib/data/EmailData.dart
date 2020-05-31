@@ -64,6 +64,18 @@ class EmailData extends ChangeNotifier {
       read: false,
       colorIndex: 2,
     ),
+    EmailItem(
+      avatar: "M",
+      description:
+          "Congratulations! You have won 1 million dollars. Click here to claim.",
+      subject: "Win money",
+      fav: true,
+      date: DateTime.now(),
+      recEmail: "notspam@truth.com",
+      recName: "Martin",
+      read: false,
+      colorIndex: 5,
+    ),
   ];
 
   void toggleFav(EmailItem emailItem) {
