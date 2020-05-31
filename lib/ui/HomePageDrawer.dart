@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:gmail17/data/EmailData.dart';
 
 class HomePageDrawer extends StatelessWidget {
   @override
@@ -14,8 +15,8 @@ class HomePageDrawer extends StatelessWidget {
                 fit: BoxFit.fill,
               ),
             ),
-            accountName: Text("Shreyansh"),
-            accountEmail: Text("shreyansh.yadav.cse19@iitbhu.ac.in"),
+            accountName: Text("ones-and-zeroes"),
+            accountEmail: Text(myEmail),
             currentAccountPicture: CircleAvatar(
               backgroundImage: AssetImage('assets/drawerAvatar.png'),
             ),

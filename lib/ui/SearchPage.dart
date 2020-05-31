@@ -57,5 +57,6 @@ bool foundIn(EmailItem item, String text) {
   String txt = text.toLowerCase();
   return item.subject.toLowerCase().contains(txt) ||
       item.description.toLowerCase().contains(txt) ||
-      item.sender.toLowerCase().contains(txt);
+      item.recEmail.toLowerCase().contains(txt) ||
+      item.recName.toLowerCase().contains(txt);
 }

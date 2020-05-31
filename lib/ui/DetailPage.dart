@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:gmail17/data/AvatarColors.dart';
 import 'package:gmail17/data/EmailData.dart';
+import 'package:gmail17/ui/EmailListTile.dart';
 import 'package:provider/provider.dart';
 
 class DetailPage extends StatelessWidget {
@@ -38,6 +41,7 @@ class DetailPage extends StatelessWidget {
         ],
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Row(
             children: <Widget>[
@@ -53,11 +57,13 @@ class DetailPage extends StatelessWidget {
                 ),
               ),
               IconButton(
-                  onPressed: toggleFavCallback,
-                  icon: Icon(
-                      Provider.of<EmailData>(context).defaultData[index].fav
-                          ? Icons.star
-                          : Icons.star_border)),
+                onPressed: toggleFavCallback,
+                icon: Icon(
+                    Provider.of<EmailData>(context).defaultData[index].fav
+                        ? Icons.star
+                        : Icons.star_border),
+                color: Colors.amber,
+              ),
             ],
           ),
           Row(
@@ -65,22 +71,50 @@ class DetailPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: CircleAvatar(
+                  backgroundColor: avatarColors[data.colorIndex],
                   child: Text(data.avatar),
                 ),
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(data.sender),
+                  padding: const EdgeInsets.only(left: 8),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        data.recName,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Text("to me"),
+                    ],
+                  ),
                 ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+                child: Text(getTileDate(data.date)),
               ),
               Icon(Icons.reply),
               Icon(Icons.more_vert),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(data.description),
+          SizedBox(
+            height: 10,
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: data.recEmail == "anonymous@secret.com"
+                  ? Image.asset("assets/rickroll.webp")
+                  : Text(
+                      data.description,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(fontSize: 15),
+                    ),
+            ),
           ),
           Row(
             children: <Widget>[

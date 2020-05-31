@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gmail17/data/AvatarColors.dart';
 import 'package:provider/provider.dart';
 import 'package:gmail17/data/EmailData.dart';
 
@@ -16,14 +17,19 @@ class ComposePage extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
+              if (to.indexOf("@") == -1) {
+                to = to + "@gmail.com";
+              }
               Provider.of<EmailData>(context, listen: false).addEmail(
                 EmailItem(
-                  avatar: "XX",
-                  sender: from,
+                  avatar: to[0].toUpperCase(),
+                  recEmail: to,
+                  recName: to.substring(0, to.indexOf('@')),
                   description: description,
                   subject: subject,
                   fav: false,
                   date: DateTime.now(),
+                  colorIndex: getColorIndex(),
                 ),
               );
               Navigator.pop(context);
@@ -48,11 +54,9 @@ class ComposePage extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: TextField(
-                  autofocus: true,
-                  onChanged: (text) {
-                    from = text;
-                  },
+                child: Text(
+                  myEmail,
+                  style: TextStyle(fontSize: 16),
                 ),
               )
             ],
@@ -68,6 +72,7 @@ class ComposePage extends StatelessWidget {
               ),
               Expanded(
                 child: TextField(
+                  autofocus: true,
                   onChanged: (text) {
                     to = text;
                   },

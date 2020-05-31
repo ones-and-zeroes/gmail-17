@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:gmail17/data/AvatarColors.dart';
 import 'package:gmail17/data/EmailData.dart';
 import 'package:gmail17/ui/DetailPage.dart';
 import 'package:gmail17/ui/HomePage.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class EmailListTile extends StatelessWidget {
@@ -29,7 +31,7 @@ class EmailListTile extends StatelessWidget {
             content: Text("Deleted"),
             behavior: SnackBarBehavior.floating,
             backgroundColor: Colors.redAccent,
-            duration: Duration(seconds: 3),
+            duration: Duration(seconds: 1),
           ),
         );
       },
@@ -37,6 +39,7 @@ class EmailListTile extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: 8, horizontal: 0),
         child: InkWell(
           onTap: () {
+            Provider.of<EmailData>(context, listen: false).read(index);
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -50,24 +53,47 @@ class EmailListTile extends StatelessWidget {
           },
           child: ListTile(
             leading: CircleAvatar(
-              child: Text(tileEmailData.avatar),
+              backgroundColor: avatarColors[tileEmailData.colorIndex],
+              child: Text(
+                tileEmailData.avatar,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+              ),
             ),
-            title: Text(tileEmailData.sender),
+            title: Text(
+              tileEmailData.recName,
+              style: TextStyle(
+                fontWeight:
+                    Provider.of<EmailData>(context).defaultData[index].read
+                        ? FontWeight.normal
+                        : FontWeight.bold,
+              ),
+            ),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(tileEmailData.subject),
-                Text(tileEmailData.description),
+                Text(
+                  tileEmailData.subject,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+                Text(
+                  tileEmailData.description,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
               ],
             ),
             trailing: Column(
               children: <Widget>[
-                Text("${DateTime.now().hour}:${DateTime.now().minute}"),
+                Text(getTileDate(tileEmailData.date)),
                 Expanded(
                   child: IconButton(
                     onPressed: toggleFavCallback,
                     icon: Icon(
-                        tileEmailData.fav ? Icons.star : Icons.star_border),
+                      tileEmailData.fav ? Icons.star : Icons.star_border,
+                      color: Colors.amber,
+                    ),
                   ),
                 )
               ],
@@ -76,5 +102,15 @@ class EmailListTile extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+String getTileDate(DateTime date) {
+  if (date.difference(DateTime.now()).inHours > -24) {
+    String min = date.minute.toString();
+    if (date.minute < 10) min = "0" + min;
+    return "${date.hour}:" + min;
+  } else {
+    return DateFormat("MMMM d").format(date);
   }
 }
