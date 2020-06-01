@@ -27,7 +27,7 @@ class ComposePage extends StatelessWidget {
               }
               Provider.of<EmailData>(context, listen: false).addEmail(
                 EmailItem(
-                  avatar: to[0].toUpperCase(),
+                  avatar: "S",
                   recEmail: to,
                   recName: to.substring(0, to.indexOf('@')),
                   description: description,
@@ -36,6 +36,7 @@ class ComposePage extends StatelessWidget {
                   date: DateTime.now(),
                   colorIndex: getColorIndex(),
                   read: true,
+                  sender: "Shreyansh",
                 ),
               );
               Navigator.pop(context);

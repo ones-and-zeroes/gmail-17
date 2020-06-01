@@ -99,7 +99,7 @@ class _FloatSearchBarRowState extends State<FloatSearchBarRow> {
             padding: const EdgeInsets.all(8.0),
             child: floatBarText == null
                 ? CircleAvatar(
-                    child: Text("SY"),
+                    child: Text("S"),
                   )
                 : Center(
                     child: IconButton(

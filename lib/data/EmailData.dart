@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 String myEmail = "me@nowhere.net";
 
 class EmailItem {
-  String avatar, description, subject, recName, recEmail;
+  String avatar, description, subject, recName, recEmail, sender;
   int colorIndex;
   DateTime date;
   bool fav, read;
@@ -17,6 +17,7 @@ class EmailItem {
     this.fav,
     this.read = false,
     this.colorIndex,
+    this.sender = "",
   });
 
   void toggleFav() {
@@ -37,6 +38,18 @@ class EmailData extends ChangeNotifier {
       recName: "Anonymous",
       read: false,
       colorIndex: 1,
+    ),
+    EmailItem(
+      avatar: "M",
+      description:
+          "Congratulations! You have won 1 million dollars. Click here to claim.",
+      subject: "Win money",
+      fav: true,
+      date: DateTime.now(),
+      recEmail: "notspam@truth.com",
+      recName: "Martin",
+      read: false,
+      colorIndex: 5,
     ),
     EmailItem(
       avatar: "G",
@@ -63,18 +76,6 @@ class EmailData extends ChangeNotifier {
       recEmail: "store@cdprojektred.net",
       read: false,
       colorIndex: 2,
-    ),
-    EmailItem(
-      avatar: "M",
-      description:
-          "Congratulations! You have won 1 million dollars. Click here to claim.",
-      subject: "Win money",
-      fav: true,
-      date: DateTime.now(),
-      recEmail: "notspam@truth.com",
-      recName: "Martin",
-      read: false,
-      colorIndex: 5,
     ),
   ];
 
